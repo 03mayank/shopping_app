@@ -1,0 +1,13 @@
+<h1>Welcome to shopping Website</h1>
+<br>
+<% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
+<% end %>
+<% if @user %>
+  looged in as<%= @user.email %>
+
+
+  <%= button_to "logout", logout_path, method: :delete %>
+<% end %>
