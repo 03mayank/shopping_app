@@ -3,11 +3,12 @@
 
 
 <%= form_with model: @user, url: sign_up_path  do |form| %>
-  <% if @user.errors.any? %>
-    <% @user.errors.full_messages.each do |message| %>
+  <% if form.object.errors.any? %>
+    <% form.object.errors.full_messages.each do |message| %>
       <div><%= message %></div>
     <% end %>
   <% end %>
+
 
   <div>
     <%= form.text_field :email %>
