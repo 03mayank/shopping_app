@@ -2,6 +2,7 @@
 
 <%= form_with url: password_reset_path do |form| %>
   <div>
+    <%= form.label :email%>
     <%= form.text_field :email %>
   </div>
   <br>

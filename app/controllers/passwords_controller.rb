@@ -2,7 +2,6 @@ class PasswordsController < ApplicationController
   before_action :user_logged_in?
   
   def edit
-    
   end
   
   def update
