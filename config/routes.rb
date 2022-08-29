@@ -17,6 +17,10 @@ Rails.application.routes.draw do
 
   get 'password/reset/edit', to: 'password_resets#edit'
   patch 'password/reset/edit', to: 'password_resets#update'
+
+  resources :users do
+    resources :addresses
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
 
