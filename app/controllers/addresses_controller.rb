@@ -18,7 +18,7 @@ class AddressesController < ApplicationController
   end
 
   def edit
-    @address = Address.find(params[:id])
+    @address = Current.user.addresses.find(params[:id])
   end
 
   def update
@@ -37,12 +37,9 @@ class AddressesController < ApplicationController
     redirect_to user_addresses_path, status: :see_other
   end
 
-
   private
 
   def address_params
     params.require(:address).permit(:area, :city, :pincode, :state)
   end
-
-
 end

@@ -1,22 +1,3 @@
-<%= form_with model: [ Current.user, Current.user.addresses.build ] do |form| %>
-  <p>
-    <%= form.label :area %><br>
-    <%= form.text_field :area %>
-  </p>
-  <p>
-    <%= form.label :city %><br>
-    <%= form.text_field :city %>
-  </p>
-  <p>
-    <%= form.label :pincode %><br>
-    <%= form.text_field :pincode %>
-  </p> 
-  <p>
-    <%= form.label :state %><br>
-    <%= form.text_field :state %>
-  </p> 
-  <p>
-    <%= form.submit "Add Address" %>
-  </p>
-<% end %>
+<h2>Edit form</h2>
+<%= render "form", address: @address%>
 
