@@ -1,14 +1,16 @@
-<h1>Reset your password</h1>
+<h2>Reset your password</h2>
 
 <%= form_with url: password_reset_edit_path do |form| %>
-  <div>
-    <%= form.password_field :password %>
+  <div class="mb-2">
+    <%= form.label :password%>
+    <%= form.password_field :password, class: "btn btn-primary"%>
   </div>
-  <div>
-    <%= form.password_field :password_confirmation %>
+  <div class="mb-2">
+    <%= form.label :password_confirmation%>
+    <%= form.password_field :password_confirmation, %>
   </div>
-  <div>
-    <%= form.submit "reset password" %>
+  <div class="mb-2">
+    <%= form.submit "reset password", class: "btn btn-primary"%>
   </div>
 <% end %>
 

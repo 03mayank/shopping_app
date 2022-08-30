@@ -1,16 +1,18 @@
-<h1>Login  In</h1>
+<h2>Login  In</h2>
 
 <%= form_with url: sign_in_path  do |form| %>
 
-  <div>
-    <%= form.text_field :email %>
+  <div class="mb-2">
+    <%= form.label :email%>
+    <%= form.text_field :email, class: "form-control" %>
   </div>
-  <div>
-    <%= form.password_field :password %>
+  <div class="mb-2"> 
+    <%= form.label :password%>
+    <%= form.password_field :password, class: "form-control" %>
   </div>
-  <%= link_to "forgot password", password_reset_path %><br>
-  <div>
-    <%= form.submit "Sign In" %>
+  <%= link_to "forgot password", password_reset_path %>
+  <div class="mb-2">
+    <%= form.submit "Sign In", class: "btn btn-primary" %>
   </div>
 <% end %>
 

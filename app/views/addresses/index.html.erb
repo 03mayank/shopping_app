@@ -1,17 +1,20 @@
 <br>
-<ul>
+<div class="row">
   <% Current.user.addresses.each do |address| %>
-    <li>
-      <tr <%= address.id %>>
-        <td><%= address.area %></td>
-        <td><%= "#{address.city}-#{address.state}" %></td>
-        <td><%= address.pincode %></td>
-        <td>
-        <%= link_to "Edit", edit_user_address_path(Current.user, address.id) %>
-        <%= link_to "Delete", user_address_path(Current.user, address.id), method: :delete, remote: true %> 
-        </td>
-      </tr>
-    </li>
-  <% end %>
+<ul class="col-md-4">
+  <div >
+    <div class="card" style="width: 18rem;">
+      <td><%= address.area %></td>
+      <td><%= "#{address.city}-#{address.state}" %></td>
+      <td><%= address.pincode %></td>
+      <td>
+        <%= link_to "Edit", edit_user_address_path(Current.user, address.id), class: "card-link btn btn-outline-secondary btn-sm"%>
+        <%= link_to "Delete", user_address_path(Current.user, address.id), method: :delete, remote: true, class: "btn btn-outline-secondary btn-sm"%> 
+      </td>
+    </div>
+    </div>
 </ul>
+  <% end %>
+</div>
 <%= link_to "Add Address", new_user_address_path %>
+

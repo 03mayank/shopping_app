@@ -1,5 +1,5 @@
 
-<h1>Sign Up</h1>
+<h2>Sign Up</h2>
 
 
 <%= form_with model: @user, url: sign_up_path  do |form| %>
@@ -10,26 +10,32 @@
   <% end %>
 
 
-  <div>
-    <%= form.text_field :email %>
+  <div class="mb-2">
+    <%= form.label :email%>
+    <%= form.text_field :email, class: "form-control" %>
   </div>
-  <div>
-    <%= form.password_field :password %>
+  <div class="mb-2">
+  <%= form.label :password%>
+    <%= form.password_field :password, class: "form-control"%>
   </div>
-  <div>
-    <%= form.password_field :password_confirmation %>
+  <div class="mb-2">
+  <%= form.label :password_confirmation%>
+    <%= form.password_field :password_confirmation, class: "form-control" %>
   </div>
-  <div>
-    <%= form.text_field :first_name %>
+  <div class="mb-2">
+    <%= form.label :first_name%>
+    <%= form.text_field :first_name, class: "form-control" %>
   </div>
-  <div>
-    <%= form.text_field :last_name %>
+  <div class="mb-2">
+    <%= form.label :last_name%>
+    <%= form.text_field :last_name, class: "form-control" %>
   </div>
-  <div>
-    <%= form.text_field :mobile %>
+  <div class="mb-2">
+    <%= form.label :mobile%>
+    <%= form.text_field :mobile, class: "form-control" %>
   </div>
-  <div>
-    <%= form.submit "Sign Up" %>
+  <div class="mb-2">
+    <%= form.submit "Sign Up", class: "btn btn-primary" %>
   </div>
 <% end %>
 
