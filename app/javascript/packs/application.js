@@ -37,3 +37,7 @@ document.addEventListener("turbolinks:load", () => {
         return new Popover(popoverTriggerEl)
     })
 })
+
+//new line
+
+

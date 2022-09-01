@@ -4,8 +4,6 @@
 
 <%= form_with model: @user, url: sign_up_path  do |form| %>
   <%= render partial: "shared/error", locals: { form: form } %>
-
-
   <div class="mb-2">
     <%= form.label :email%>
     <%= form.text_field :email, class: "form-control" %>

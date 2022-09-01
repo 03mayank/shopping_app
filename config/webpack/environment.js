@@ -11,3 +11,5 @@ environment.plugins.append("Provide", new webpack.ProvidePlugin({
     // End new addition
 
 module.exports = environment
+
+

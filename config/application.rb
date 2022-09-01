@@ -5,7 +5,7 @@ require "rails/all"
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
-config.assets.initialize_on_precompile = false
+
 
 module ShoppingApp
   class Application < Rails::Application
@@ -19,5 +19,6 @@ module ShoppingApp
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.assets.initialize_on_precompile = false
   end
 end
