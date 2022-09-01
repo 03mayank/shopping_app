@@ -3,11 +3,7 @@
 
 
 <%= form_with model: @user, url: sign_up_path  do |form| %>
-  <% if form.object.errors.any? %>
-    <% form.object.errors.full_messages.each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  <% end %>
+  <%= render partial: "shared/error", locals: { form: form } %>
 
 
   <div class="mb-2">

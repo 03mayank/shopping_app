@@ -11,8 +11,8 @@ class AddressesController < ApplicationController
   def create
     @address = Current.user.addresses.new(address_params)
     if @address.save
-      flash[:success] = "Address Added successfully"
-      redirect_to user_addresses_path
+      # flash[:success] = "Address Added successfully"
+      redirect_to user_addresses_path, message: "Address Added successfully"
     else
       render :new
     end
@@ -23,8 +23,8 @@ class AddressesController < ApplicationController
 
   def update
     if @address.update(address_params)
-      flash[:success] = "Address Modified successfully"
-      redirect_to user_addresses_path
+      # flash[:success] = "Address Modified successfully"
+      redirect_to user_addresses_path, message: "Address Modified successfully"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -45,3 +45,5 @@ class AddressesController < ApplicationController
     @address = Current.user.addresses.find(params[:id])
   end
 end
+
+
