@@ -1,4 +1,5 @@
 class AddressesController < ApplicationController
+  before_action :set_address, only: %i[edit update destroy]
   def index 
     @addresses = Current.user.addresses
   end
@@ -18,7 +19,6 @@ class AddressesController < ApplicationController
   end
 
   def edit
-    @address = Current.user.addresses.find(params[:id])
   end
 
   def update
@@ -31,9 +31,7 @@ class AddressesController < ApplicationController
   end
 
   def destroy
-    @address = Address.find(params[:id])
     @address.destroy
-
     redirect_to user_addresses_path, status: :see_other
   end
 
@@ -41,5 +39,9 @@ class AddressesController < ApplicationController
 
   def address_params
     params.require(:address).permit(:area, :city, :pincode, :state)
+  end
+
+  def set_address
+    @address = Current.user.addresses.find(params[:id])
   end
 end
