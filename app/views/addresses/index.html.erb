@@ -1,0 +1,17 @@
+<br>
+<ul>
+  <% Current.user.addresses.each do |address| %>
+    <li>
+      <tr <%= address.id %>>
+        <td><%= address.area %></td>
+        <td><%= "#{address.city}-#{address.state}" %></td>
+        <td><%= address.pincode %></td>
+        <td>
+        <%= link_to "Edit", edit_user_address_path(Current.user, address.id) %>
+        <%= link_to "Delete", user_address_path(Current.user, address.id), method: :delete, remote: true %> 
+        </td>
+      </tr>
+    </li>
+  <% end %>
+</ul>
+<%= link_to "Add Address", new_user_address_path %>

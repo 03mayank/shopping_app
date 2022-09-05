@@ -8,9 +8,12 @@
 <% end %>
 
 <% if Current.user %>
-  <p>looged in as <%= Current.user.email %></p>
-  <%= link_to "reset password", password_path%>
+  <p>logged in as <%= Current.user.email %></p>
+
+  <%= link_to "Address", user_addresses_path(Current.user.id) %>
+  <%= link_to "reset password", password_path %>
   <%= button_to "logout", logout_path, method: :delete %>
+  
 
 <% else %>
   <div>
