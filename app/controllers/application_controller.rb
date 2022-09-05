@@ -12,4 +12,10 @@ class ApplicationController < ActionController::Base
       redirect_to sign_in_path, alert: "You must be signed in"
     end
   end
+
+  def user_admin?
+    if Current.user.email != "admin@sz.com"
+      redirect_to products_path, alert: "User must be admin"
+    end
+  end
 end
