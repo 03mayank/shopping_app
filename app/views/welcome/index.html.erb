@@ -1,9 +1,10 @@
 <% if Current.user %>
-    <div class="row">
-      <% Product.all.each do |product| %>
-        <ul class="col-md-4">
-          <div>
-            <div class="card mt-5" style="width: 18rem;">
+  <div class="row">
+    <% Product.all.each do |product| %>
+      <ul class="col-md-4">
+        <div>
+          <div class="card mt-5" style="width: 18rem;">
+            <%= link_to product_path(product.id), class: "text-decoration-none" do %>
               <table class="table table-hover table-striped table-dark">
                 <tr>
                   <td>  Product </td>
@@ -26,14 +27,15 @@
                   <td> <%= product.category.category_name%></td>
                 </tr>
               </table>
-              <div class= "d-flex justify-content-between  m-3">
-                <button type="button" class="btn btn-info">Buy</button>
-                <button type="button" class="btn btn-warning">Add to Cart</button> 
+            <% end %>
+            <div class= "d-flex justify-content-between  m-3">
+              <button type="button" class="btn btn-info">Buy</button>
+              <button type="button" class="btn btn-warning">Add to Cart</button> 
               </div>
             </div>
           </div>
-        </ul>
-      <% end %>
+      </ul>
+    <% end %>
   </div>
 <% else %>
   <div>

@@ -1,0 +1,35 @@
+<h1><%= @product.name %></h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <div class="p-3 mb-2 bg-info text-dark link">
+        <%= image_tag url_for(@product.product_image), :size => '250x300' %>
+      </div>
+      <div class= "d-flex justify-content-evenly  m-3">
+        <button type="button" class="btn btn-info">Buy</button>
+        <button type="button" class="btn btn-warning">Add to Cart</button> 
+      </div>
+    </div>  
+    <div class="col-md-7">
+      <table>
+          <tr>
+            <td><strong> Product </strong></td>
+            <td> <%= @product.name %></td>
+          </tr>
+          <tr>
+            <td> <strong> Product description:  </strong></td>
+            <td> <%= @product.description%></td>
+          </tr>
+          <tr>
+            <td><strong> Price</strong></td>
+            <td> <%= @product.price %></td>
+          </tr>
+          <tr>
+            <td><strong> Product Category</strong></td>
+            <td> <%= @product.category.category_name%></td>
+          </tr>
+        </table>
+    </div>
+  </div>
+</div>
