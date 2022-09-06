@@ -3,11 +3,11 @@
 <%= form_with url: password_reset_edit_path do |form| %>
   <div class="mb-2">
     <%= form.label :password%>
-    <%= form.password_field :password, class: "btn btn-primary"%>
+    <%= form.password_field :password, placeholder: "Password"%>
   </div>
   <div class="mb-2">
     <%= form.label :password_confirmation%>
-    <%= form.password_field :password_confirmation %>
+    <%= form.password_field :password_confirmation, placeholder: "Password Confirmation" %>
   </div>
   <div class="mb-2">
     <%= form.submit "reset password", class: "btn btn-primary"%>

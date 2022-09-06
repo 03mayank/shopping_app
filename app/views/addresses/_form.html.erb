@@ -1,23 +1,23 @@
 <%= form_with model: [Current.user, @address] do |form| %>
   <%= render partial: "shared/error", locals: { form: form }%>
-  <p>
-    <%= form.label :area %><br>
-    <%= form.text_field :area %>
-  </p>
-  <p>
-    <%= form.label :city %><br>
-    <%= form.text_field :city %>
-  </p>
-  <p>
-    <%= form.label :pincode %><br>
-    <%= form.text_field :pincode %>
-  </p> 
-  <p>
-    <%= form.label :state %><br>
-    <%= form.text_field :state %>
-  </p> 
-  <p>
-    <%= form.submit "Add Address" %>
-  </p>
+  <div class="mb-3">
+    <%= form.label :area, class: "form-label"%><br>
+    <%= form.text_field :area, class: "form-control", placeholder: "Area Address"%>
+  </div>
+  <div class = "mt-3">
+    <%= form.label :city, class: "form-label" %><br>
+    <%= form.text_field :city, class: "form-control", placeholder: "City"%>
+  </div>
+  <div class = "mt-3">
+    <%= form.label :pincode, class: "form-label" %><br>
+    <%= form.text_field :pincode, class: "form-control", placeholder: "Pincode"%>
+  </div>
+  <div class = "mt-3">
+    <%= form.label :state, class: "form-label" %><br>
+    <%= form.text_field :state, class: "form-control", placeholder: "State" %>
+  </div>
+  <div class = "mt-3">
+      <%= form.submit "Add Address", class: "btn btn-primary"%>
+  </div>
 <% end %>
 
