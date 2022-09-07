@@ -22,7 +22,7 @@
                     class: "form-select", 'aria-label' => "Default select example"  %>
   </div>
   <div class="mb-2">
-    <%= form.file_field :product_image %>
+    <%= form.file_field :product_images, multiple: true, accept: "image/jpeg, image/jpg, image/gif, image/png "%>
   </div>
   <div class="mb-2">
     <%= form.submit "Add product", class: "btn btn-primary" %>
