@@ -3,6 +3,7 @@ class ProductsController < ApplicationController
   before_action :user_admin?, only: %i[new edit update destroy]
   before_action :set_product, only: %i[edit update destroy]
   before_action :set_category, only: %i[create update]
+  before_action :set_category_names, only: %i[new edit]
 
   def index
     @products = Product.all
@@ -60,5 +61,8 @@ class ProductsController < ApplicationController
   def set_product
     @product = Product.find(params[:id])
   end
+
+  def set_category_names
+    @category_names = Category.all.pluck(:category_name)
+  end
 end
-  

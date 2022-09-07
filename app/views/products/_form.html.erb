@@ -18,7 +18,7 @@
   </div>
   <div class="mb-2">
     <%= form.label :category_name %>
-    <%= form.select :category_name, options_for_select(Category.all.pluck(:category_name)), 
+    <%= form.select :category_name, options_for_select(@category_names), 
                     class: "form-select", 'aria-label' => "Default select example"  %>
   </div>
   <div class="mb-2">
