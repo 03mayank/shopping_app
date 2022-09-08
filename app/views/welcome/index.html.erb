@@ -1,19 +1,5 @@
-<h1>Welcome to shopping Website</h1>
-<br>
-
-<% flash.each do |type, msg| %>
-  <div>
-    <%= msg %>
-  </div>
-<% end %>
-
 <% if Current.user %>
-  <p>logged in as <%= Current.user.email %></p>
-
-  <%= link_to "Address", user_addresses_path(Current.user.id) %>
-  <%= link_to "reset password", password_path %>
-  <%= button_to "logout", logout_path, method: :delete %>
-  
+  <p>logged in as <strong><%= Current.user.first_name %></strong></p>
 
 <% else %>
   <div>
@@ -26,4 +12,3 @@
     <%= link_to "login", sign_in_path %>
   </div>  
 <% end %>
-

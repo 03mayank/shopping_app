@@ -5,5 +5,5 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: /\A[^@\s]+@[^@\s]+\z/, message: 'Invalid email' }
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :mobile, presence: true
+  validates :mobile, presence: true, :numericality => true, :length => { :minimum => 10, :maximum => 15 }
 end

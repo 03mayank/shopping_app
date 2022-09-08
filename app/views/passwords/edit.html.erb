@@ -1,4 +1,4 @@
-<h1>Reset Password</h1>
+<h2>Reset Password</h2>
 
 
 <%= form_with model: Current.user, url: password_path  do |form| %>
@@ -8,17 +8,17 @@
     <% end %>
   <% end %>
 
-  <div>
+  <div class="mb-2">
     <%= form.label :password%>
-    <%= form.password_field :password %>
+    <%= form.password_field :password, class: "form-control", placeholder: "Password"%>
   </div>
-  <div>
+  <div class="mb-2">
     <%= form.label :password_confirmation%>
-    <%= form.password_field :password_confirmation %>
+    <%= form.password_field :password_confirmation, class: "form-control", placeholder: "Password Confirmation" %>
   </div>
 
-  <div>
-    <%= form.submit "Reset Password" %>
+  <div class="mb-2">
+    <%= form.submit "Reset Password", class: "btn btn-primary" %>
   </div>
 <% end %>
 

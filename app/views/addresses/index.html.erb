@@ -1,17 +1,32 @@
-<br>
-<ul>
+<%= render partial: "shared/flash"%>
+<h2>Address</h2>
+<%= link_to "Add Address", new_user_address_path, class: "btn btn-success float-right ml-2" %>
+<div class="row">
   <% Current.user.addresses.each do |address| %>
-    <li>
-      <tr <%= address.id %>>
-        <td><%= address.area %></td>
-        <td><%= "#{address.city}-#{address.state}" %></td>
-        <td><%= address.pincode %></td>
-        <td>
-        <%= link_to "Edit", edit_user_address_path(Current.user, address.id) %>
-        <%= link_to "Delete", user_address_path(Current.user, address.id), method: :delete, remote: true %> 
-        </td>
-      </tr>
-    </li>
+    <ul class="col-md-4">
+      <div >
+        <div class="card mt-5" style="width: 18rem;">
+        <table class="table table-hover table-striped table-dark">
+        <tr>
+          <td>  Area Address</td>
+          <td> <%= address.area %></td>
+        </tr>
+          <tr>
+          <td>  City:</td>
+        <td> <%= "#{address.city}-#{address.state}" %></td>
+        </tr>
+        <tr>
+        <td> Pincode</td>
+        <td> <%= address.pincode %></td>
+        </tr>
+        </table>
+        <div class= "d-flex justify-content-between  m-3">
+          <%= link_to "Edit", edit_user_address_path(Current.user, address.id), class: "card-link btn btn-secondary btn-sm"%>
+          <%= link_to "Remove", user_address_path(Current.user, address.id), method: :delete, remote: true, class: "btn btn-secondary btn-sm"%> 
+        </div>
+      </div>
+    </ul>
   <% end %>
-</ul>
-<%= link_to "Add Address", new_user_address_path %>
+</div>
+
+

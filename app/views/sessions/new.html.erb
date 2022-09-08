@@ -1,18 +1,19 @@
-<h1>Login  In</h1>
+<div class="d-flex justify-content-center"><h2>Login  In</h2></div>
 
-<%= form_with url: sign_in_path  do |form| %>
-
-  <div>
-    <%= form.label :email%>
-    <%= form.text_field :email %>
-  </div>
-  <div>
-    <%= form.label :password%>
-    <%= form.password_field :password %>
-  </div>
-  <%= link_to "forgot password", password_reset_path %><br>
-  <div>
-    <%= form.submit "Sign In" %>
-  </div>
-<% end %>
+<div class="d-flex justify-content-center">
+  <%= form_with url: sign_in_path  do |form| %>
+    <div class="mb-2">
+      <%= form.label :email%>
+      <%= form.text_field :email, class: "form-control", placeholder: "abc@xyz.com" %>
+    </div>
+    <div class="mb-2"> 
+      <%= form.label :password%>
+      <%= form.password_field :password, class: "form-control",placeholder: "Password" %>
+    </div>
+    <%= link_to "forgot password", password_reset_path %>
+    <div class="mb-2">
+      <%= form.submit "Sign In", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
 

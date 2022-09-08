@@ -1,13 +1,13 @@
-<h1>Forgot your password</h1>
+<h2>Forgot your password</h2>
 
 <%= form_with url: password_reset_path do |form| %>
-  <div>
+  <div class="mb-2">
     <%= form.label :email%>
-    <%= form.text_field :email %>
+    <%= form.text_field :email, class: "form-control", placeholder: "abc@xyz.com"%>
   </div>
   <br>
-  <div>
-    <%= form.submit "Send Password Reset link" %>
+  <div class="mb-2">
+    <%= form.submit "Send Password Reset link", class: "btn btn-primary" %>
   </div>
 <% end %>
 

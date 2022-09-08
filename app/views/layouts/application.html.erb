@@ -10,6 +10,12 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render partial: "shared/navbar" %>
+      <div class = "container" style="min-height:75vh">
+        <%= render partial: "shared/flash"%>
+        <%= yield %>
+      </div>
+    <%= render partial: "shared/footer"%> 
   </body>
 </html>
+
