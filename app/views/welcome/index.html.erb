@@ -30,10 +30,14 @@
             <% end %>
             <div class= "d-flex justify-content-between  m-3">
               <button type="button" class="btn btn-info">Buy</button>
-              <button type="button" class="btn btn-warning">Add to Cart</button> 
-              </div>
+              <% if Current.user.cart.cart_items.find_by(product_id: product.id) %>
+                <%= button_to "Remove from cart", product_cart_item_path(Current.cart.cart_items.ids, product.id), method: :delete, remote: true, class: "btn btn-danger"%>
+              <% else %>
+                <%= link_to "Add to Cart", product_cart_items_path(product.id), method: :post, class: "btn btn-warning  " %>
+              <% end %>
             </div>
           </div>
+        </div>  
       </ul>
     <% end %>
   </div>

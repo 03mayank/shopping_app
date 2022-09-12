@@ -23,7 +23,11 @@ Rails.application.routes.draw do
   end
 
   resources :categories
-  resources :products
+  resources :products do
+    resources :cart_items
+  end
+
+  resources :carts
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
 

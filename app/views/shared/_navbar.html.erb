@@ -17,11 +17,14 @@
   </div>
   
   <li class="nav-item dropdown navbar-nav me-5 mb-2 mb-lg-0 ">
+  
+
     <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
       Account
     </a>
     <ul class="dropdown-menu" style= "margin-left: -38px" aria-labelledby="navbarDropdown">
       <% if Current.user %>
+        <li><%link_to "Cart", product_cart_items_path, class: "dropdown-item"%></li>
         <li><div class ="d-flex justify-content-center">hi, <strong><%= Current.user.first_name %></strong></div></li>
         <li><hr class="dropdown-divider"></li>
         <li><%= link_to "reset password", password_path, class: "dropdown-item" %> </li>
