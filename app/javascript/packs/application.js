@@ -38,6 +38,6 @@ document.addEventListener("turbolinks:load", () => {
     })
 })
 
-//new line
+
 
 
