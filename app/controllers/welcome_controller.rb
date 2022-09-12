@@ -1,12 +1,7 @@
 class WelcomeController < ApplicationController
-  before_action :set_product
   def index
+    # @cart_item = Current.user.cart.cart_items.find_by(product_id: product.id)
   end
   
-  private
-   
-  def set_product
-   @products = Product.all
-  end
 end
 

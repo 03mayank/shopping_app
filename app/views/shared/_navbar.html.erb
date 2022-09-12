@@ -9,9 +9,15 @@
         <li class="nav-item">
           <%= link_to "Home", root_path, class: "nav-link active text-white"%>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
+        <% if Current.user %>
+          <li>
+            <%= link_to "Your Cart", cart_items_path, class: "nav-link nav-link active text-white" %>
+          </li>
+          <li>
+            <%= link_to "Address", user_addresses_path(Current.user.id), class: "nav-link nav-link active text-white" %>
+          </li>
+        <%end%>
+        
       </ul>
     </div>
   </div>
@@ -25,8 +31,6 @@
         <li><div class ="d-flex justify-content-center">hi, <strong><%= Current.user.first_name %></strong></div></li>
         <li><hr class="dropdown-divider"></li>
         <li><%= link_to "reset password", password_path, class: "dropdown-item" %> </li>
-        <li><hr class="dropdown-divider"></li>
-        <li><%= link_to "Address", user_addresses_path(Current.user.id), class: "dropdown-item" %></li>
         <li><hr class="dropdown-divider"></li>
         <li><%= button_to "logout", logout_path, method: :delete, class: "dropdown-item" %></li>
         <% if Current.user.email == "admin@sz.com" %>
