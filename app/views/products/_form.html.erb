@@ -1,0 +1,31 @@
+<%= form_with model: @product do |form| %>
+  <%= render partial: "shared/error", locals: { form: form }%> 
+  <div class="mb-2">
+    <%= form.label :name%>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+  <div class="mb-2">
+    <%= form.label :description %>
+    <%= form.text_field :description, class: "form-control"%>
+  </div>
+  <div class="mb-2">
+    <%= form.label :price %>
+    <%= form.number_field :price, class: "form-control"%>
+  </div>
+  <div class="mb-2">
+    <%= form.label :stock %>
+    <%= form.number_field :stock, class: "form-control" %>
+  </div>
+  <div class="mb-2">
+    <%= form.label :category_name %>
+    <%= form.select :category_name, options_for_select(@category_names), 
+                    class: "form-select", 'aria-label' => "Default select example"  %>
+  </div>
+  <div class="mb-2">
+    <%= form.file_field :product_images, multiple: true, accept: "image/jpeg, image/jpg, image/gif, image/png "%>
+  </div>
+  <div class="mb-2">
+    <%= form.submit "Add product", class: "btn btn-primary" %>
+  </div>
+<% end %>
+

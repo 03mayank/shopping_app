@@ -1,0 +1,39 @@
+
+<%= link_to "Add Product", new_product_path, class: "btn btn-success float-right ml-2 mt-2" %>
+
+<div class="row">
+  <% Product.all.each do |product| %>
+    <ul class="col-md-4">
+      <div>
+        <div class="card mt-5" style="width: 18rem;">
+          <table class="table table-hover table-striped table-dark">
+            <tr>
+              <td>  Product </td>
+              <td> <%= product.name %></td>
+            </tr>
+            <tr>
+              <td>  Product description:</td>
+              <td> <%= product.description%></td>
+            </tr>
+            <tr>
+              <td> Price</td>
+              <td> <%= product.price %></td>
+            </tr>
+            <tr>
+              <td> Stock</td>
+              <td> <%= product.stock %></td>
+            </tr>
+            <tr>
+              <td> Product Category</td>
+              <td> <%= product.category.category_name%></td>
+            </tr>
+          </table>
+          <div class= "d-flex justify-content-between  m-3">
+            <%= link_to "Edit", edit_product_path(product.id, product.category.id) , class: "card-link btn btn-secondary btn-sm"%>
+            <%= link_to "Remove", product_path(product.id, product.category.id),  method: :delete, remote: true, class: "btn btn-secondary btn-sm"%> 
+          </div>
+        </div>
+      </div>
+    </ul>
+  <% end %>
+</div>

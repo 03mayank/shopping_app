@@ -1,6 +1,6 @@
 <nav class="navbar bg-dark  navbar-expand-lg navbar-light ">
   <div class="container-fluid">
-    <%= link_to "Logo", root_path, class: "navbar-brand text-white"%>
+    <%= image_tag 'logo.png', :size => '45x45'%>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -22,11 +22,17 @@
     </a>
     <ul class="dropdown-menu" style= "margin-left: -38px" aria-labelledby="navbarDropdown">
       <% if Current.user %>
+        <li><div class ="d-flex justify-content-center">hi, <strong><%= Current.user.first_name %></strong></div></li>
+        <li><hr class="dropdown-divider"></li>
         <li><%= link_to "reset password", password_path, class: "dropdown-item" %> </li>
         <li><hr class="dropdown-divider"></li>
         <li><%= link_to "Address", user_addresses_path(Current.user.id), class: "dropdown-item" %></li>
         <li><hr class="dropdown-divider"></li>
         <li><%= button_to "logout", logout_path, method: :delete, class: "dropdown-item" %></li>
+        <% if Current.user.email == "admin@sz.com" %>
+          <li><hr class="dropdown-divider"></li>
+          <li><%= link_to "Products", products_path, class: "dropdown-item" %></li>
+        <% end %>
       <% else %>
         <li><%= link_to "Sign Up", sign_up_path, class: "dropdown-item" %></li>
         <li><hr class="dropdown-divider"></li>
