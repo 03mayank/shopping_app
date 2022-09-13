@@ -1,7 +1,8 @@
 class CartItemsController < ApplicationController
   before_action :set_cart_item, only: %i[update destroy] 
-
+  
   def index
+    @cart_items = Current.cart.cart_items
   end
 
   def create
@@ -15,7 +16,11 @@ class CartItemsController < ApplicationController
   end
 
   def update
-    @cart_item.update_attribute(:quantity)
+    if @cart_item.update(quantity: params[:cart_item][:quantity])
+      redirect_back(fallback_location: root_path) 
+    else
+      redirect_back(fallback_location: root_path) 
+    end
   end
 
   def destroy
@@ -28,7 +33,7 @@ class CartItemsController < ApplicationController
   def set_cart_item
     @cart_item = Current.cart.cart_items.find_by(product_id: params[:id])
     if @cart_item.blank?
-      redirect_to root_path, message: "No Item in cart"
+      redirect_back(fallback_location: root_path)
     end
   end
 

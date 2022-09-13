@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :set_product
 
 
+
   
   def set_current_user
     if session[:user_id]

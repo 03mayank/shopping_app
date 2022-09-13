@@ -1,7 +1,10 @@
 <h2>Your Cart</h2>
+<% if @cart_items.empty?%>
+  <h4 style="color:red;">Cart Empty</h4>
+<% end %>
 <div class="row">
-<% @products.each do |product| %>
-  <% if Current.user.cart.cart_items.find_by(product_id: product.id) %>
+<% @cart_items.each do |cart_item| %>
+  <% product = cart_item.product %>
     <ul class="col-md-4">
         <div>
           <div class="card mt-5" style="width: 18rem;">
@@ -29,16 +32,21 @@
                 </tr>
                 <tr>
                   <td> Item Quantity</td>
-                  <td> <%= Current.user.cart.cart_items.find_by(product_id: product.id).quantity%></td>
+                  <td> <%= cart_item.quantity%></td>
                 </tr>
               </table>
             <% end %>
+            <%= form_for cart_item, url: product_cart_item_path(cart_item, product), method: :patch, local: true do |f| %>
+               <%= f.range_field :quantity, min: 1, max: 5, step: 1, class: "slide", id: "slider1"%><br>
+              <%= f.submit "Update quantity", class: "btn btn-success" %>
+            <% end %>
             <div class= "d-flex justify-content-between  m-3">
               <button type="button" class="btn btn-info">Buy</button>
-                <%= button_to "Remove from cart", product_cart_item_path(Current.cart.cart_items.ids, product.id), method: :delete, remote: true, class: "btn btn-danger"%>
+              <%= button_to "Remove from cart", product_cart_item_path(Current.cart.cart_items.ids, product.id), method: :delete, remote: true, class: "btn btn-danger"%>
             </div>
           </div>
         </div>  
       </ul>
-  <%end%>
 <%end%>
+
+  

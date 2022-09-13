@@ -1,5 +1,4 @@
 <% if Current.user %>
-  <%= link_to "Your Cart", product_cart_items_path(@products.ids )%>
   <div class="row">
     <% @products.each do |product| %>
       <ul class="col-md-4">
@@ -31,7 +30,7 @@
             <% end %>
             <div class= "d-flex justify-content-between  m-3">
               <button type="button" class="btn btn-info">Buy</button>
-              <% if Current.user.cart.cart_items.find_by(product_id: product.id) %>
+              <% if cart_item?(product.id) %>
                 <%= button_to "Remove from cart", product_cart_item_path(Current.cart.cart_items.ids, product.id), method: :delete, remote: true, class: "btn btn-danger"%>
               <% else %>
                 <%= link_to "Add to Cart", product_cart_items_path(product.id), method: :post, class: "btn btn-warning  " %>
