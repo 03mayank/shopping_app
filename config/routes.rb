@@ -28,6 +28,10 @@ Rails.application.routes.draw do
   end
 
   get 'cart_items', to: 'cart_items#index', as: :cart_items
+
+  resources :orders
+  resources :order_items
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
 
