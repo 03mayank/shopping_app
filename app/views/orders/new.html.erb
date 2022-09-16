@@ -1,16 +1,27 @@
+<div class="split right">
+  <div class="centered">
+    <div style="color:green;">Total order value will- <%= number_to_currency(total_cart_price(@cart_items)) %></div>
 
-
-<%= form_with url: orders_path, method: :post do |form| %>
-  <div class="mb-2">
-    <%= form.label :address %>
-    <%= form.select :address, options_for_select(address_cancatination)  %>
+    <%# <% if Current.cart.cart_items.count > 0 %>
+      <div class = "d-flex justify-content-end mt-2">
+        <%= form_with url: orders_path, method: :post do |form| %>
+          <div class="mb-2">
+            <%= form.label :address, "Select Address"%>
+            <%= form.select :address, options_for_select(address_cancatination)  %>
+          </div>
+          <%= form.submit "Place Order", class: "btn btn-success log" %>
+        <% end %>
+      </div>
+    <%# <% end %>
   </div>
-  <%= form.submit "Place Order", class: "btn btn-success log" %>
-<% end %>
-<div class="row">
-<% @cart_items.each do |cart_item| %>
-  <% product = cart_item.product %>
-    <ul class="col-md-4">
+</div>
+
+<div class="split left">
+  <div class="centered">    
+    <div class="row">
+    <% @cart_items.each do |cart_item| %>
+      <% product = cart_item.product %>
+      <ul class="col-md-4">
         <div>
           <div class="card mt-5" style="width: 18rem;">
             <%= link_to product_path(product.id), class: "text-decoration-none" do %>
@@ -28,10 +39,6 @@
                   <td> <%=  number_to_currency(product.price) %></td>
                 </tr>
                 <tr>
-                  <td> Stock</td>
-                  <td> <%= product.stock %></td>
-                </tr>
-                <tr>
                   <td> Product Category</td>
                   <td> <%= product.category.category_name%></td>
                 </tr>
@@ -41,15 +48,13 @@
                 </tr>
               </table>
             <% end %>
-            <%= form_for cart_item, url: product_cart_item_path(cart_item, product), method: :patch, local: true do |f| %>
-              <%= f.range_field :quantity, min: 1, max: 5, step: 1, class: "slide", id: "slider1"%>
-              <%= number_to_currency(cart_item.total_price) %><br>
-              <%= f.submit "Update quantity", class: "btn btn-outline-success btn-sm" %>
-            <% end %>
-            <div class= "d-flex justify-content-between  m-3">
+            <div class= "d-flex justify-content-center  m-3">
               <%= button_to "Remove from cart", product_cart_item_path(Current.cart.cart_items.ids, product.id), method: :delete, remote: true, class: "btn btn-danger"%>
             </div>
           </div>
         </div>  
       </ul>
-<%end%>
+    <%end%>
+    </div>
+  </div>
+</div>

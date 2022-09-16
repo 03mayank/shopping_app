@@ -1,6 +1,8 @@
 class OrdersController < ApplicationController  
+  # before_action :find_product_by_id, only: %i[new]
+  
   def index
-    @order_items = Current.user.orders
+    @orders = Current.user.orders
   end
 
   def new
@@ -12,7 +14,12 @@ class OrdersController < ApplicationController
     @order = Current.user.orders.new(order_params)
     @order.time_of_order = Time.now
     @order.total_amount = total_order_value
-    if @order.save
+    if params[:order_type]== "Buy_now"
+      if @order.save
+        @order_items = @order.order_items.create(product_id: params[:product_id], quantity: 1)
+      end
+    else 
+      @order.save
       Current.cart.cart_items.each do |cart_item|
         @order_items = @order.order_items.create(product_id: cart_item.product.id, quantity: cart_item.quantity)
       end
@@ -21,6 +28,9 @@ class OrdersController < ApplicationController
     redirect_to orders_path
   end
 
+  def show
+    @order = Order.find(params[:id])
+  end
 
   private
 
@@ -37,6 +47,10 @@ class OrdersController < ApplicationController
     return sum
   end
 
+  # def find_product_by_id
+  #   product_id = params[:product_id]
+  # end
+
   # def get_cart_products
   #   products_ids = []
   #   Current.cart.cart_items.each do |cart_item|
@@ -44,5 +58,4 @@ class OrdersController < ApplicationController
   #   end
   #   return products_ids
   # end
-
 end
