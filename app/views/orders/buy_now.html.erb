@@ -2,8 +2,8 @@
 <div class = "d-flex justify-content-end mt-2">
   <%if Current.user.addresses.present?%>
     <%= form_with url: orders_path, method: :post do |form| %>
-          <%= form.hidden_field :product_id, value: @product.id%>
-    <%= form.hidden_field :order_type, value: :buy_now%>
+      <%= form.hidden_field :product_id, value: @product.id%>
+      <%= form.hidden_field :order_type, value: :buy_now%>
       <div class="mb-2">
         <%= form.label :address, "Select Address"%>
         <%= form.select :address, options_for_select(address_cancatination), class: "form-select"%>
