@@ -12,11 +12,11 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
-
+import "bootstrap"
 
 require("@popperjs/core")
 
-import "bootstrap"
+
 
 // Import the specific modules you may need (Modal, Alert, etc)
 import { Tooltip, Popover } from "bootstrap"

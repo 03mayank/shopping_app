@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :set_current_user
-  
+  before_action :set_cart
+
   def set_current_user
     if session[:user_id]
       Current.user = User.find(session[:user_id])
@@ -17,5 +18,9 @@ class ApplicationController < ActionController::Base
     if Current.user.email != "admin@sz.com"
       redirect_to products_path, alert: "User must be admin"
     end
+  end
+  
+  def set_cart
+    Current.cart ||= Current.user.get_or_create_cart if Current.user.present?
   end
 end

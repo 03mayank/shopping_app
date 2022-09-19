@@ -24,7 +24,11 @@
       </div>
       <div class= "d-flex justify-content-evenly  m-3">
         <button type="button" class="btn btn-info">Buy</button>
-        <button type="button" class="btn btn-warning">Add to Cart</button> 
+        <% if cart_item?(@product.id) %>
+          <%= button_to "Remove from cart", product_cart_item_path(Current.cart.cart_items.ids, @product.id), method: :delete, remote: true, class: "btn btn-danger"%>
+        <% else %>
+          <%= link_to "Add to Cart", product_cart_items_path(@product.id), method: :post, class: "btn btn-warning  " %>
+        <% end %>
       </div>
     </div>  
     <div class="col-md-7">
