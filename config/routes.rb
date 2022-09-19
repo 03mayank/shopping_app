@@ -32,6 +32,8 @@ Rails.application.routes.draw do
   resources :orders
   resources :order_items
 
+  post 'orders/buy_now', to: 'orders#buy_now', as: :buy_now
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
 

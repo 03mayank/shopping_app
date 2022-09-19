@@ -8,29 +8,39 @@ class OrdersController < ApplicationController
   def new
     @orders = Order.new
     @cart_items = Current.cart.cart_items
+
   end
 
   def create
     @order = Current.user.orders.new(order_params)
     @order.time_of_order = Time.now
-    @order.total_amount = total_order_value
-    if params[:order_type]== "Buy_now"
-      if @order.save
-        @order_items = @order.order_items.create(product_id: params[:product_id], quantity: 1)
-      end
+    if params[:order_type]== "buy_now"
+      @product = Product.find(params[:product_id])
+      @order.total_amount = @product.price
+      @order.save
+      @order_items = @order.order_items.create(product_id: params[:product_id], quantity: 1)
     else 
+      @order.total_amount = total_order_value
       @order.save
       Current.cart.cart_items.each do |cart_item|
         @order_items = @order.order_items.create(product_id: cart_item.product.id, quantity: cart_item.quantity)
       end
       Current.cart.cart_items.destroy_all
     end
-    redirect_to orders_path
+    flash[:notice] = "Order placed Successfully!"
+    redirect_to orders_path 
+    end
+
+  def buy_now
+    @order = Current.user.orders.new
+    @product = Product.find(params[:product_id])
   end
 
   def show
     @order = Order.find(params[:id])
   end
+
+
 
   private
 

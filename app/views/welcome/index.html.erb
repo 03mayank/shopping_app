@@ -29,7 +29,7 @@
               </table>
             <% end %>
             <div class= "d-flex justify-content-between  m-3">
-              <%= link_to "Buy Now", new_order_path, params: { order_type: :Buy_now, product_id: product.id}, class: "btn btn-info" %>
+              <%= button_to "Buy Now", buy_now_path(product_id: product.id), class: "btn btn-info" %>
               <% if cart_item?(product.id) %>
                 <%= button_to "Remove from cart", product_cart_item_path(Current.cart.cart_items.ids, product.id), method: :delete, remote: true, class: "btn btn-danger"%>
               <% else %>
