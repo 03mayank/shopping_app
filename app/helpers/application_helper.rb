@@ -12,12 +12,11 @@ module ApplicationHelper
     return all_address
   end
 
-  def total_cart_price(cart_items)
-    sum = 0
-    cart_items.each do |cart_item|
-      price = cart_item.product.price * cart_item.quantity
-      sum += price
+  def get_cart_products_ids
+    products_ids = []
+    Current.cart.cart_items.each do |cart_item|
+      products_ids << cart_item.product.id
     end
-    return sum
+    return products_ids
   end
 end

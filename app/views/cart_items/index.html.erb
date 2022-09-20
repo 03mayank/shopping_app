@@ -5,7 +5,7 @@
 <% end %>
 
 <h2>Your Cart</h2>
-<div>Your Cart Value- <%=number_to_currency(total_cart_price(@cart_items)) %>
+<div>Your Cart Value- <%=number_to_currency(Current.cart.total_cart_value) %>
 <% if @cart_items.empty?%>
   <h4 style="color:red;">Cart Empty</h4>
 <% end %>

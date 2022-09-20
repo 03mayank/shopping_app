@@ -12,21 +12,9 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Current.user.orders.new(order_params)
-    @order.time_of_order = Time.now
-    if params[:order_type]== "buy_now"
-      @product = Product.find(params[:product_id])
-      @order.total_amount = @product.price
-      @order.save
-      @order_items = @order.order_items.create(product_id: params[:product_id], quantity: 1)
-    else 
-      @order.total_amount = total_order_value
-      @order.save
-      Current.cart.cart_items.each do |cart_item|
-        @order_items = @order.order_items.create(product_id: cart_item.product.id, quantity: cart_item.quantity)
-      end
-      Current.cart.cart_items.destroy_all
-    end
+    @order = Current.user.orders.build(order_attributes)
+    @order.save!
+    Current.cart.cart_items.destroy_all if params[:order_type] != "buy_now"
     flash[:notice] = "Order placed Successfully!"
     redirect_to orders_path 
     end
@@ -45,25 +33,20 @@ class OrdersController < ApplicationController
   def order_params
     params.permit(:address)
 	end
-  
-  def total_order_value
-    sum = 0
-    Current.cart.cart_items.each do |cart_item|
-      price = cart_item.product.price * cart_item.quantity
-      sum += price
+
+  def order_attributes
+    order_attributes = order_params.merge(time_of_order: Time.current)
+    if params[:order_type]== "buy_now"
+      @product = Product.find(params[:product_id])
+      order_attributes.merge(
+        total_amount: @product.price,
+        order_items_attributes: [{product_id: @product.id, quantity: 1}]
+      )
+    else 
+      order_attributes.merge(
+        total_amount: Cart.total_cart_price(Current.cart.cart_items), 
+        order_items_attributes: Current.cart.cart_items.map{|ci| ci.slice(:product_id, :quantity)}
+      )
     end
-    return sum
   end
-
-  # def find_product_by_id
-  #   product_id = params[:product_id]
-  # end
-
-  # def get_cart_products
-  #   products_ids = []
-  #   Current.cart.cart_items.each do |cart_item|
-  #     products_ids << cart_item.product.id
-  #   end
-  #   return products_ids
-  # end
 end
