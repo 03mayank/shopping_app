@@ -1,8 +1,9 @@
 class SignupMailer < ApplicationMailer
 
-  def new_user_registration_email
-    @user = params[:user]
+  def new_user_registration_email(user)
+    @user = user[:user]
 
-    mail to: params[:user].email
+    mail(to: user[:user].email,
+      subject: 'Welcome to Shopping zone Site')
   end
 end
