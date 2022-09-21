@@ -8,6 +8,7 @@ class RegistrationsController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       redirect_to root_path, notice: "Signed In"
+      SignupMailer.with(user: @user).new_user_registration_email.deliver_later
     else
       render :new
     end
