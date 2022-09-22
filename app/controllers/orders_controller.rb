@@ -43,12 +43,8 @@ class OrdersController < ApplicationController
     else
       order_attributes.merge(
         total_amount: Current.cart.total_cart_value, 
-<<<<<<< HEAD
         order_items_attributes: 
           Current.cart.cart_items.map{|ci| ci.slice(:product_id, :quantity).merge(price: ci.product.price)}
-=======
-        order_items_attributes: Current.cart.cart_items.map{|ci| ci.slice(:product_id, :quantity)}
->>>>>>> Implementing Action Mailer
       )
     end
   end
