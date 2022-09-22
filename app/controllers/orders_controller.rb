@@ -1,14 +1,11 @@
 class OrdersController < ApplicationController  
-  # before_action :find_product_by_id, only: %i[new]
   
   def index
     @orders = Current.user.orders
   end
 
   def new
-    @orders = Order.new
     @cart_items = Current.cart.cart_items
-
   end
 
   def create
@@ -17,10 +14,9 @@ class OrdersController < ApplicationController
     Current.cart.cart_items.destroy_all if params[:order_type] != "buy_now"
     flash[:notice] = "Order placed Successfully!"
     redirect_to orders_path 
-    end
+  end
 
   def buy_now
-    @order = Current.user.orders.new
     @product = Product.find(params[:product_id])
   end
 
@@ -32,7 +28,7 @@ class OrdersController < ApplicationController
 
   def order_params
     params.permit(:address)
-	end
+  end
 
   def order_attributes
     order_attributes = order_params.merge(time_of_order: Time.current)
@@ -40,13 +36,15 @@ class OrdersController < ApplicationController
       @product = Product.find(params[:product_id])
       order_attributes.merge(
         total_amount: @product.price,
-        order_items_attributes: [{product_id: @product.id, quantity: 1}]
+        order_items_attributes: [{product_id: @product.id, quantity: 1, price: @product.price}]
       )
-    else 
+    else
       order_attributes.merge(
-        total_amount: Cart.total_cart_price(Current.cart.cart_items), 
-        order_items_attributes: Current.cart.cart_items.map{|ci| ci.slice(:product_id, :quantity)}
+        total_amount: Current.cart.total_cart_value, 
+        order_items_attributes: 
+          Current.cart.cart_items.map{|ci| ci.slice(:product_id, :quantity).merge(price: ci.product.price)}
       )
     end
   end
 end
+    

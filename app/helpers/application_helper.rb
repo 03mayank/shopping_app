@@ -1,4 +1,5 @@
 module ApplicationHelper
+  
   def cart_item?(product_id)
     return true if Current.cart.cart_items.pluck(:product_id).include?(product_id)   
   end
@@ -10,13 +11,5 @@ module ApplicationHelper
       all_address << add
     end
     return all_address
-  end
-
-  def get_cart_products_ids
-    products_ids = []
-    Current.cart.cart_items.each do |cart_item|
-      products_ids << cart_item.product.id
-    end
-    return products_ids
   end
 end
