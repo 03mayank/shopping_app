@@ -2,14 +2,14 @@ require 'rails_helper'
 include ActiveJob::TestHelper
 
 RSpec.describe "RegistrationsControllers", type: :request do
-  describe "GET /index" do
-    it "renders the index template" do
+  describe "GET /NEW" do
+    it "renders the new template" do
       get sign_up_path
       expect(response).to render_template('new')
     end
   end
 
-  describe "POST:  create" do
+  describe "POST: create" do
     before(:each) do
       @user = User.create(
         email: "abc@xyz.com", 
@@ -80,7 +80,7 @@ RSpec.describe "RegistrationsControllers", type: :request do
       post sign_up_path, params: params
       ActiveJob::Base.queue_adapter = :test
       expect {
-        SignupJob.perform_later(user: @user)
+        SignupJob.perform_later(user: params[:user])
       }.to have_enqueued_job.on_queue('default')
     end
 
