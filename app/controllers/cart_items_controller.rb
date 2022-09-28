@@ -9,21 +9,21 @@ class CartItemsController < ApplicationController
     @cart_item = Current.cart.cart_items.new(cart_item_params)
     @cart_item.quantity = 1
     if @cart_item.save
-      flash.now[:notice] = 'Cart item was successfully added'
+      flash[:notice] = 'Cart item successfully added'
     end
     redirect_back(fallback_location: root_path) 
   end
 
   def update
     if @cart_item.update(quantity: params[:cart_item][:quantity])
-      flash.now[:notice] = 'Updated quantity'
+      flash[:notice] = 'Updated quantity'
     end
     redirect_back(fallback_location: root_path)  
   end
 
   def destroy
     @cart_item.destroy
-    flash.now[:notice] = 'Cart item removed'
+    flash[:notice] = 'Cart item removed'
     redirect_back(fallback_location: root_path)
   end
   
