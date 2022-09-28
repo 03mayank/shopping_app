@@ -34,6 +34,7 @@ RSpec.describe "RegistrationsControllers", type: :request do
       }
       post sign_up_path, params: params
       expect(response.status).to eq(302)
+      expect(flash[:notice]).to match('Signed In')
     end
     
     it "creates a new registration" do

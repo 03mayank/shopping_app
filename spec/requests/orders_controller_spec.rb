@@ -32,14 +32,6 @@ RSpec.describe "OrdersControllers", type: :request do
     end
   end
 
-  # describe "GET /buy_now" do
-  #   it "should render the but_now" do
-  #     get buy_now_path
-  #     expect(response).to render_template('buy_now')
-  #   end
-  # end
-
-
   describe "GET /show" do
     it "should render show" do
       get order_path(order.id)
@@ -51,7 +43,8 @@ RSpec.describe "OrdersControllers", type: :request do
     it "should create order" do
       post orders_path
       expect(response.status).to eq(302)  
-      expect(response).to redirect_to(orders_path)   
+      expect(response).to redirect_to(orders_path)  
+      expect(flash[:notice]).to match("Order placed Successfully!")
     end
   end
 

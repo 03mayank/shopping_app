@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe "ProductsControllers", type: :request do
 
   let!(:user) { FactoryBot.create(:user) }
-  let!(:product) { FactoryBot.create(:product) }
+  let!(:category) { FactoryBot.create(:category) }  
+  let!(:product) { FactoryBot.create(:product, category: category) }
   before do
     allow(Current).to receive(:user).and_return(user)
   end
@@ -53,26 +54,26 @@ RSpec.describe "ProductsControllers", type: :request do
       user.email = "admin@sz.com"
       post products_path, params: params
       expect(response.status).to eq(302)  
-      expect(response).to redirect_to(products_path)   
+      expect(response).to redirect_to(products_path)  
+      expect(flash[:notice]).to match('Product Added successfully') 
     end
 
-    # it "if create product fails" do
-    #   params = {
-    #     product: {
-    #       name:	'',
-    #       description: 'Mirrorless Camera with 16-50mm Power Zoom Lens (Black)',
-    #       price: 79990,
-    #       stock: 1000,
-    #       product_images:  [Rack::Test::UploadedFile.new('spec/factories/fixtures/camera.png', 'image/png'), 
-    #         Rack::Test::UploadedFile.new('spec/factories/fixtures/camera1.png', 'image/png')],
-    #       category_name: 'Mobile'
-    #     }
-    #   }
-    #   user.email = "admin@sz.com"
-    #   post products_path, params: params
-    #   expect(response.status).to eq(402)  
-    #   expect(response).to render_template('new')   
-    # end
+    it "if create product fails" do
+      params = {
+        product: {
+          description: 'Mirrorless Camera with 16-50mm Power Zoom Lens (Black)',
+          price: 79990,
+          stock: 1000,
+          product_images:  [Rack::Test::UploadedFile.new('spec/factories/fixtures/camera.png', 'image/png'), 
+            Rack::Test::UploadedFile.new('spec/factories/fixtures/camera1.png', 'image/png')],
+          category_name: 'Electronic'
+        }
+      }
+      user.email = "admin@sz.com"
+      post products_path, params: params
+      expect(response.status).to eq(422)  
+      expect(response).to render_template('new')  
+    end
   end
 
   describe "PATCH /update" do
@@ -91,7 +92,8 @@ RSpec.describe "ProductsControllers", type: :request do
       user.email = "admin@sz.com"
       patch product_path(product.id), params: params
       expect(response.status).to eq(302)  
-      expect(response).to redirect_to(products_path)   
+      expect(response).to redirect_to(products_path)  
+      expect(flash[:notice]).to match('Product updated successfully')  
     end
   end
 

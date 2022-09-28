@@ -27,6 +27,8 @@ RSpec.describe "AddressesControllers", type: :request do
       }
       post user_addresses_path(user.id), params: params
       expect(response.status).to eq(302)
+      expect(flash[:notice]).to match('Address Added successfully')
+
     end
 
     it "creates a new address with blank field" do
@@ -39,7 +41,7 @@ RSpec.describe "AddressesControllers", type: :request do
         }
       }
       post user_addresses_path(user.id), params: params
-      expect(response.status).to eq(200)
+      expect(response.status).to eq(422)
     end
 
     it "redirection after a new address created" do
@@ -89,6 +91,8 @@ RSpec.describe "AddressesControllers", type: :request do
       patch user_address_path(user.id, address.id), params: params
       expect(response.status).to eq(302)  
       expect(response).to redirect_to(user_addresses_path)   
+      expect(flash[:notice]).to match('Address Modified successfully')
+
     end
 
     it "update the address on fails" do
@@ -102,7 +106,9 @@ RSpec.describe "AddressesControllers", type: :request do
       }
       patch user_address_path(user.id, address.id), params: params
       expect(response.status).to eq(422)  
-      expect(response).to render_template(:edit)   
+      expect(response).to render_template(:edit) 
+
+
     end
   end
 
@@ -111,6 +117,7 @@ RSpec.describe "AddressesControllers", type: :request do
       delete user_address_path(user.id, address.id)
       expect(response.status).to eq(303)
       expect(response).to redirect_to(user_addresses_path)
+      expect(flash[:notice]).to match('Address Deleted')
     end
   end
 end 
