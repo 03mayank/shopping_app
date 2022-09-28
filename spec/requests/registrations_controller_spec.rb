@@ -2,6 +2,7 @@ require 'rails_helper'
 include ActiveJob::TestHelper
 
 RSpec.describe "RegistrationsControllers", type: :request do
+  let!(:user) { FactoryBot.create(:user) }
   describe "GET /NEW" do
     it "renders the new template" do
       get sign_up_path
@@ -10,17 +11,6 @@ RSpec.describe "RegistrationsControllers", type: :request do
   end
 
   describe "POST: create" do
-    before(:each) do
-      @user = User.create(
-        email: "abc@xyz.com", 
-        password: '1234', 
-        password_confirmation: '1234', 
-        first_name: 'first', 
-        last_name: 'last', 
-        mobile: '1234567890'
-      )
-    end
-  
     it "creates a new registration" do
       params = {
         user: {
@@ -34,6 +24,7 @@ RSpec.describe "RegistrationsControllers", type: :request do
       }
       post sign_up_path, params: params
       expect(response.status).to eq(302)
+      expect(flash[:notice]).to match('Signed In')
     end
     
     it "creates a new registration" do

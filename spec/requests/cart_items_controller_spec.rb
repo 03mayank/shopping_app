@@ -20,13 +20,28 @@ RSpec.describe "CartItemsControllers", type: :request do
   describe "POST /create" do
     it "should add product to a cart" do
       params = {
-        product: {
+        cart_item: {
           quantity: 1
         }
       }
       post product_cart_items_path(product.id), params: params
       expect(response.status).to eq(302)  
       expect(response).to redirect_to(root_path)   
+      expect(flash[:notice]).to match('Cart item successfully added')
+    end
+  end
+
+  describe "PATCH /update" do
+    it "should update product quanrtity to a cart" do
+      params = {
+        cart_item: {
+          quantity: 3
+        }
+      }
+      patch product_cart_item_path(cart_item.id, product.id), params: params
+      expect(response.status).to eq(302)  
+      expect(response).to redirect_to(root_path)   
+      expect(flash[:notice]).to match('Updated quantity')
     end
   end
 
@@ -35,6 +50,7 @@ RSpec.describe "CartItemsControllers", type: :request do
       delete product_cart_item_path(cart_item.id, product.id)
       expect(response.status).to eq(302)
       expect(response).to redirect_to(root_path)
+      expect(flash[:notice]).to match('Cart item removed')
     end
   end
 end
