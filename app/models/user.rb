@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_secure_password
   has_many :addresses
   has_one :cart
+  has_many :orders
 
   validates :email, presence: true, uniqueness: true, format: { with: /\A[^@\s]+@[^@\s]+\z/, message: 'Invalid email' }
   validates :first_name, presence: true
