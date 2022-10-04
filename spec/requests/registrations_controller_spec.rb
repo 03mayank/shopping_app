@@ -22,7 +22,7 @@ RSpec.describe "RegistrationsControllers", type: :request do
           mobile: '9876543210'
         }
       }
-      post sign_up_path, params: params
+      expect { post sign_up_path, params: params }.to change { User.count }.by(1)
       expect(response.status).to eq(302)
       expect(flash[:notice]).to match('Signed In')
     end

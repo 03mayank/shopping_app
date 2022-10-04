@@ -25,13 +25,13 @@ RSpec.describe "AddressesControllers", type: :request do
           state: 'MP'
         }
       }
-      post user_addresses_path(user.id), params: params
+      expect { post user_addresses_path(user.id), params: params }.to change { Address.count }.by(1)
       expect(response.status).to eq(302)
       expect(flash[:notice]).to match('Address Added successfully')
-
+      # expect(Address.count).to change.by(1)
     end
 
-    it "creates a new address with blank field" do
+    it "Should not creates a new address with blank field" do
       params = {
         address: {
           area: '268G, Sneh Nagar',
@@ -40,7 +40,7 @@ RSpec.describe "AddressesControllers", type: :request do
           state: 'MP'
         }
       }
-      post user_addresses_path(user.id), params: params
+      expect { post user_addresses_path(user.id), params: params }.to change { Address.count }.by(0)
       expect(response.status).to eq(422)
     end
 
@@ -94,7 +94,7 @@ RSpec.describe "AddressesControllers", type: :request do
       expect(flash[:notice]).to match('Address Modified successfully')
     end
 
-    it "update the address on fails" do
+    it "should not update the address on fails" do
       params = {
         address: {
           area: '45, Shrivastav Colony',
@@ -111,7 +111,7 @@ RSpec.describe "AddressesControllers", type: :request do
 
   describe "DESTROY /delete" do
     it "should destroy the address" do
-      delete user_address_path(user.id, address.id)
+      expect { delete user_address_path(user.id, address.id) }.to change { Address.count }.by(-1)
       expect(response.status).to eq(303)
       expect(response).to redirect_to(user_addresses_path)
       expect(flash[:notice]).to match('Address Deleted')

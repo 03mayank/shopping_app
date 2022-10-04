@@ -24,7 +24,7 @@ RSpec.describe "CartItemsControllers", type: :request do
           quantity: 1
         }
       }
-      post product_cart_items_path(product.id), params: params
+      expect { post product_cart_items_path(product.id), params: params }.to change { CartItem.count }.by(1)
       expect(response.status).to eq(302)  
       expect(response).to redirect_to(root_path)   
       expect(flash[:notice]).to match('Cart item successfully added')
@@ -47,7 +47,7 @@ RSpec.describe "CartItemsControllers", type: :request do
 
   describe "DESTROY /delete" do
     it "should remove a product from cart" do
-      delete product_cart_item_path(cart_item.id, product.id)
+      expect { delete product_cart_item_path(cart_item.id, product.id) }.to change { CartItem.count }.by(-1)
       expect(response.status).to eq(302)
       expect(response).to redirect_to(root_path)
       expect(flash[:notice]).to match('Cart item removed')
