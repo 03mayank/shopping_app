@@ -10,10 +10,12 @@ class OrdersController < ApplicationController
 
   def create
     @order = Current.user.orders.build(order_attributes)
-    @order.save!
-    Current.cart.cart_items.destroy_all if params[:order_type] != "buy_now"
-    flash[:notice] = "Order placed Successfully!"
-    redirect_to orders_path 
+    if @order.save!
+      Current.cart.cart_items.destroy_all if params[:order_type] != "buy_now"
+      OrderMailer.with(order: @order, user: Current.user).new_order_email.deliver_later
+      flash[:notice] = "Order placed Successfully!"
+      redirect_to orders_path 
+    end
   end
 
   def buy_now
