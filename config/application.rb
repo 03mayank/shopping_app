@@ -21,5 +21,6 @@ module ShoppingApp
     config.time_zone = 'Kolkata'
     # config.eager_load_paths << Rails.root.join("extras")
     config.assets.initialize_on_precompile = false
+    config.active_job.queue_adapter = :sidekiq
   end
 end
