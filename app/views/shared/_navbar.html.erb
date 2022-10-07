@@ -36,7 +36,7 @@
         <li><%= button_to "logout", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
         <% if Current.user.email == "admin@sz.com" %>
           <li><hr class="dropdown-divider"></li>
-          <li><%= link_to "Products", products_path, class: "dropdown-item" %></li>
+          <li><%= link_to "Products Section", products_path, class: "dropdown-item" %></li>
         <% end %>
       <% else %>
         <li><%= link_to "Sign Up", new_user_registration_path, class: "dropdown-item" %></li>
