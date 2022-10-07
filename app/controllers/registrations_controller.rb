@@ -11,7 +11,7 @@ class RegistrationsController < ApplicationController
       # SignupMailer.with(user: @user).new_user_registration_email.deliver_later
       SignupJob.perform_later(user: @user)
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 

@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
   before_action :user_admin?, only: %i[new edit update destroy]
   before_action :set_product, only: %i[edit update destroy]
   before_action :set_category, only: %i[create update]
-  before_action :set_category_names, only: %i[new edit]
+  before_action :set_category_names, only: %i[new edit create]
 
   def index
     @products = Product.all
@@ -20,9 +20,9 @@ class ProductsController < ApplicationController
   def create
     @product = @category.products.new(product_params)
     if @product.save
-      redirect_to products_path, message: "Product Added successfully"
+      redirect_to products_path, notice: "Product Added successfully"
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -33,7 +33,7 @@ class ProductsController < ApplicationController
   def update
     @product.category = @category
     if @product.update(product_params)
-      redirect_to products_path, message: "Product updated successfully"
+      redirect_to products_path, notice: "Product updated successfully"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -41,7 +41,7 @@ class ProductsController < ApplicationController
   
   def destroy
     @product.destroy
-    redirect_to products_path, status: :see_other
+    redirect_to products_path, status: :see_other, notice: 'Product deleted'
   end
 
   private
