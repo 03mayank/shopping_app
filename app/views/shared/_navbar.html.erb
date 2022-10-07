@@ -30,20 +30,18 @@
       Account
     </a>
     <ul class="dropdown-menu" style= "margin-left: -38px" aria-labelledby="navbarDropdown">
-      <% if Current.user %>
+      <% if user_signed_in? %>
         <li><div class ="d-flex justify-content-center">hi, <strong><%= Current.user.first_name %></strong></div></li>
         <li><hr class="dropdown-divider"></li>
-        <li><%= link_to "reset password", password_path, class: "dropdown-item" %> </li>
-        <li><hr class="dropdown-divider"></li>
-        <li><%= button_to "logout", logout_path, method: :delete, class: "dropdown-item" %></li>
+        <li><%= button_to "logout", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
         <% if Current.user.email == "admin@sz.com" %>
           <li><hr class="dropdown-divider"></li>
           <li><%= link_to "Products", products_path, class: "dropdown-item" %></li>
         <% end %>
       <% else %>
-        <li><%= link_to "Sign Up", sign_up_path, class: "dropdown-item" %></li>
+        <li><%= link_to "Sign Up", new_user_registration_path, class: "dropdown-item" %></li>
         <li><hr class="dropdown-divider"></li>
-        <li><%= link_to "login", sign_in_path, class: "dropdown-item" %></li>
+        <li><%= link_to "login", new_user_session_path, class: "dropdown-item" %></li>
       <% end %>
     </ul>
   </li>

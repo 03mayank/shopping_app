@@ -44,14 +44,15 @@
     <% end %>
   </div>
 <% else %>
+  <br>
   <div>
     New User?
-    <%= link_to "Sign Up", sign_up_path %>
+    <%= link_to "Sign Up", new_user_registration_path %>
   </div>
   
   <div>
     Already have an accout
-    <%= link_to "login", sign_in_path %>
+    <%= link_to "login", new_user_session_path %>
   </div>  
 <% end %>
 
