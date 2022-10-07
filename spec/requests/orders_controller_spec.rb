@@ -11,10 +11,8 @@ RSpec.describe "OrdersControllers", type: :request do
       time_of_delivery: Time.current + 7.days }
   end
 
-
   before do
     allow(Current).to receive(:user).and_return(user)
-    
     allow_any_instance_of(OrdersController).to receive(:order_attributes).and_return(attributes)
   end
 
@@ -41,22 +39,12 @@ RSpec.describe "OrdersControllers", type: :request do
 
   describe "POST /create" do
     it "should create order" do
-      post orders_path
+      expect { post orders_path }.to change { Order.count }.by(1)
       expect(response.status).to eq(302)  
       expect(response).to redirect_to(orders_path)  
       expect(flash[:notice]).to match("Order placed Successfully!")
     end
   end
-
-  describe "POST /create" do
-    it "should create order" do
-      post orders_path
-      expect(response.status).to eq(302)  
-      expect(response).to redirect_to(orders_path)   
-    end
-  end
-
-
 end
      
 

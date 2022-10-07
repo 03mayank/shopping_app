@@ -52,7 +52,7 @@ RSpec.describe "ProductsControllers", type: :request do
         }
       }
       user.email = "admin@sz.com"
-      post products_path, params: params
+      expect { post products_path, params: params }.to change { Product.count }.by(1)
       expect(response.status).to eq(302)  
       expect(response).to redirect_to(products_path)  
       expect(flash[:notice]).to match('Product Added successfully') 
@@ -70,7 +70,8 @@ RSpec.describe "ProductsControllers", type: :request do
         }
       }
       user.email = "admin@sz.com"
-      post products_path, params: params
+      expect { post products_path, params: params }.to change { Product.count }.by(0)
+
       expect(response.status).to eq(422)  
       expect(response).to render_template('new')  
     end
