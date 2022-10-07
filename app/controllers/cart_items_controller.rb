@@ -10,27 +10,35 @@ class CartItemsController < ApplicationController
     @cart_item.quantity = 1
     if @cart_item.save
       flash[:notice] = 'Cart item successfully added'
+      respond_to do |format|
+        format.js
+        format.html { redirect_back(fallback_location: root_path) }
+      end
     end
-    redirect_back(fallback_location: root_path) 
   end
 
   def update
     if @cart_item.update(quantity: params[:cart_item][:quantity])
       flash[:notice] = 'Updated quantity'
+      # redirect_back(fallback_location: root_path)  
+      respond_to do |format|
+        format.js
+        format.html { redirect_back(fallback_location: root_path) }
+      end
     end
-    redirect_back(fallback_location: root_path)  
   end
 
   def destroy
     @cart_item.destroy
-    flash[:notice] = 'Cart item removed'
-    redirect_back(fallback_location: root_path)
+    respond_to do |format|
+      format.js
+      format.html { redirect_back(fallback_location: root_path) }
+    end
   end
   
   private
-  
   def set_cart_item
-    @cart_item = Current.cart.cart_items.find_by(product_id: params[:id])
+    @cart_item = Current.cart.cart_items.find_by(product_id: params[:product_id])
   end
 
   def cart_item_params

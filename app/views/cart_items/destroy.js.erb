@@ -1,0 +1,21 @@
+if (document.querySelector("#remove_from_cart" + <%= @cart_item.id %>)){
+  document.querySelector("#remove_from_cart" + <%= @cart_item.id %>).remove();
+  if (<%= Current.cart.cart_items.count > 0 %>) {
+    document.getElementById("place_holder").innerHTML = "Your Cart Value -";
+    document.querySelector("#Cart_value").innerHTML = <%=(Current.cart.total_cart_value) %>;
+  }
+  else { 
+    document.querySelector("#Cart_value").innerHTML = "Cart empty";
+  }
+}
+
+if (document.getElementById('cart_option<%=@cart_item.product.id%>')){
+  var add_to_cart_button = '<%= link_to "Add to Cart", product_cart_items_path(@cart_item.product.id), method: :post, class: "btn btn-warning ", remote: true %>';
+  document.getElementById('cart_option<%=@cart_item.product.id%>').innerHTML = add_to_cart_button;
+}
+
+if (document.getElementById('cart_option_show<%=@cart_item.product.id%>')){
+  var remove_from_cart_button = '<%= link_to "Add to Cart", product_cart_items_path(@cart_item.product.id), method: :post, class: "btn btn-warning" %>'
+  document.getElementById('cart_option_show<%=@cart_item.product.id%>').innerHTML = remove_from_cart_button
+}
+

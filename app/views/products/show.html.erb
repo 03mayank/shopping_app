@@ -24,11 +24,13 @@
       </div>
       <div class= "d-flex justify-content-evenly  m-3">
         <%= button_to "Buy Now", buy_now_path(product_id: @product.id), class: "btn btn-info" %>
-        <% if cart_item?(@product.id) %>
-          <%= button_to "Remove from cart", product_cart_item_path(Current.cart.cart_items.ids, @product.id), method: :delete, remote: true, class: "btn btn-danger"%>
-        <% else %>
-          <%= link_to "Add to Cart", product_cart_items_path(@product.id), method: :post, class: "btn btn-warning  " %>
-        <% end %>
+        <div id = "cart_option_show<%=@product.id%>">
+          <% if cart_item?(@product.id) %>
+            <%= button_to "Remove from cart", product_cart_item_path(@product.id, Current.cart.cart_items.ids), method: :delete, remote: true, class: "btn btn-danger"%>
+          <% else %>
+            <%= link_to "Add to Cart", product_cart_items_path(@product.id), method: :post, class: "btn btn-warning  " %>
+          <% end %>
+        </div>
       </div>
     </div>  
     <div class="col-md-7">
