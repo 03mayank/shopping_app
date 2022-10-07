@@ -34,6 +34,5 @@ RSpec.describe Order, type: :model do
       t = Order.reflect_on_association(:order_items)
       expect(t.macro).to eq(:has_many)
     end
-
   end
 end

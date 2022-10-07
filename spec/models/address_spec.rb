@@ -3,8 +3,6 @@ require 'rails_helper'
 RSpec.describe Address, type: :model do
   let(:address) { FactoryBot.create(:address) }
 
-
-
   context 'validation test' do
     it "is valid with valid attributes" do
       expect(address).to be_valid
