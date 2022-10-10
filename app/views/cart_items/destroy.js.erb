@@ -15,6 +15,7 @@ if (document.getElementById('cart_option<%=@cart_item.product.id%>')){
 }
 
 if (document.getElementById('cart_option_show<%=@cart_item.product.id%>')){
-var remove_from_cart_button = '<%= link_to "Add to Cart", product_cart_items_path(@cart_item.product.id), method: :post, class: "btn btn-warning" %>'
-document.getElementById('cart_option_show<%=@cart_item.product.id%>').innerHTML = remove_from_cart_button
+  var remove_from_cart_button = '<%= link_to "Add to Cart", product_cart_items_path(@cart_item.product.id), method: :post, class: "btn btn-warning" %>'
+  document.getElementById('cart_option_show<%=@cart_item.product.id%>').innerHTML = remove_from_cart_button
 }
+
