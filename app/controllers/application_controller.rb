@@ -1,10 +1,14 @@
 class ApplicationController < ActionController::Base
+  
+  protect_from_forgery with: :exception
+  
+  before_action :update_allowed_parameters, if: :devise_controller?
   before_action :set_current_user
   before_action :set_cart
 
   def set_current_user
-    if session[:user_id]
-      Current.user = User.find(session[:user_id])
+    if user_signed_in?
+      Current.user = current_user
     end
   end
 
@@ -16,11 +20,18 @@ class ApplicationController < ActionController::Base
 
   def user_admin?
     if Current.user.email != "admin@sz.com"
-      redirect_to products_path, alert: "User must be admin"
+      # redirect_to products_path, alert: "User must be admin"
     end
   end
   
   def set_cart
     Current.cart ||= Current.user.get_or_create_cart if Current.user.present?
+  end
+
+  protected
+
+  def update_allowed_parameters
+    devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:email, :password, :first_name, :last_name, :mobile)}
+    devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:name, :surname, :email, :password, :current_password)}
   end
 end
