@@ -13,6 +13,8 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :mobile, presence: true, :numericality => true, :length => { :minimum => 10, :maximum => 15 }
+  
+  self.table_name = "users"
 
   def sign_up_mail
     SignupJob.perform_later(self)
