@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
 
   def user_admin?
     if Current.user.email != "admin@sz.com"
-      # redirect_to products_path, alert: "User must be admin"
+      redirect_to root_path, notice: "User must be admin"
     end
   end
   

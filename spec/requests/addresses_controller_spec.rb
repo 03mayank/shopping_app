@@ -28,7 +28,6 @@ RSpec.describe "AddressesControllers", type: :request do
       expect { post user_addresses_path(user.id), params: params }.to change { Address.count }.by(1)
       expect(response.status).to eq(302)
       expect(flash[:notice]).to match('Address Added successfully')
-      # expect(Address.count).to change.by(1)
     end
 
     it "Should not creates a new address with blank field" do
